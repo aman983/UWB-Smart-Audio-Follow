@@ -1,0 +1,22 @@
+/*
+ * Adds the DW3110 UWB chip to the DWM3001CDK board definition.
+ * The board file already enables spi3 (SCK/MOSI/MISO pins, CS on P1.06)
+ * but does not describe the chip itself.
+ *
+ * Pin numbers taken from the driver's own DWM3001CDK overlay.
+ */
+&spi3 {
+	status = "okay";
+	cs-gpios = <&gpio1 6 GPIO_ACTIVE_LOW>;
+
+	dw3000: dw3000@0 {
+		compatible = "decawave,dw3000";
+		reg = <0>;
+		status = "okay";
+		/* Start conservative. Raise to 32000000 once everything works. */
+		spi-max-frequency = <32000000>;
+		irq-gpios    = <&gpio1 2  GPIO_ACTIVE_HIGH>;
+		reset-gpios  = <&gpio0 25 GPIO_ACTIVE_LOW>;
+		wakeup-gpios = <&gpio1 19 GPIO_ACTIVE_HIGH>;
+	};
+};
