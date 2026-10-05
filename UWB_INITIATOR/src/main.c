@@ -263,6 +263,7 @@ int main(void)
                 printk("UWB init failed !!!\n");
                 return 0;
         }
+        
         Node_initiator_run();
         return 0;
 }
